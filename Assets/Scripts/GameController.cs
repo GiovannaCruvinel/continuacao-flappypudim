@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+    public GameObject menu;
+    public GameObject canvas;
+
     public Estado estado { get; private set; }
 
     public GameObject obstaculo;
@@ -37,6 +40,8 @@ public class GameController : MonoBehaviour {
 
     public void PlayerComecou() {
         estado = Estado.Jogando;
+        menu.SetActive(false);
+        canvas.SetActive(false);
         StartCoroutine(GerarObstaculos());
     }
 
