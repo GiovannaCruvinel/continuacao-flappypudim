@@ -8,8 +8,8 @@ public class GameController : MonoBehaviour {
     private int pontos;
     public Text txtPontos;
 
-    public GameObject menu;
-    public GameObject painelMenu;
+    public GameObject menuCamera;
+    public GameObject menuPanel;
 
     public Estado estado { get; private set; }
 
@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour {
 	
 	IEnumerator GerarObstaculos() {
         while (GameController.instancia.estado == Estado.Jogando) {
-            Vector3 pos = new Vector3(3f, Random.Range(-1f, 3.0f), 0f);
+            Vector3 pos = new Vector3(7.7f, Random.Range(1.5f, 4f), 0f);
             GameObject obj = Instantiate(obstaculo, pos, Quaternion.identity) as GameObject;
             Destroy(obj, tempoDestruicao);
             yield return new WaitForSeconds(espera);
@@ -44,8 +44,8 @@ public class GameController : MonoBehaviour {
 
     public void PlayerComecou() {
         estado = Estado.Jogando;
-        menu.SetActive(false);
-        painelMenu.SetActive(false);
+        menuCamera.SetActive(false);
+        menuPanel.SetActive(false);
         atualizarPontos(0);
         StartCoroutine(GerarObstaculos());
     }
@@ -58,5 +58,10 @@ public class GameController : MonoBehaviour {
     {
         pontos = x;
         txtPontos.text = "" + x;
+    }
+
+    public void incrementarPontos(int x)
+    {
+        atualizarPontos(pontos + x);
     }
 }
